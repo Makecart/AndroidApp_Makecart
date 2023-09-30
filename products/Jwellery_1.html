@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Makecart</title>
+  <meta name="theme-color" content="#232F3F" >
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+  <div class="h">
+    Makecart
+  </div>
+  <div class="mar">
+  <br>
+  <center>
+  
+  <img src=" jwe1.jpg" alt="shor1">
+
+  </center>
+   <div id="gh">
+  <h1>
+   Best jwellery
+  </h1>
+  
+  <h3>
+    Only at ₹70 not
+   <s style="color : red">₹999</s>
+  </h3>
+  <br><br>
+  
+  <center>
+    <button class="normal" onclick="gen()">
+      Buy now
+    </button>
+  </center>
+ </div>
+</body>
+<script>
+
+function gen(){
+  document.getElementById("gh").innerHTML = '<center><input placeholder="Your email" id="email"><br><br><input placeholder="Your full name" id="name"><br><br><input placeholder="Full address" id="address"><br><br><input placeholder="pincode" type="number" id="pincode"><br><br><input placeholder="City" id="city"><br><br><input type="number" placeholder="enter phonenumber" id="phone"><br><br><button class="normal" onclick="req()">Buy Request</button>';
+}
+
+var uuid = crypto.randomUUID();
+function uuid_show(){
+  
+  document.getElementById("gh").innerHTML = "<h1>Your order was placed , order id : <span style='user-select: all;'>" + uuid + "</span> , Note the order id for order cancelation <br><br> <button class='normal' onclick='cancle_order()'>Cancle your order</button>";
+  
+}
+
+
+  function req(){
+    var email = document.getElementById("email").value;
+    var city = document.getElementById("city").value;
+    var address = document.getElementById("address").value;
+    var pincode = document.getElementById("pincode").value;
+    var name = document.getElementById("name").value;
+    var phone = document.getElementById("phone").value;
+    var make_order = "A new order by " + name + " for ₹70 , email : " + email + ", address of home : " + address + ", city : " + city + ", pincode : " + pincode + ", phone number : " + phone + ", order is jwellery_1 , order id : " + uuid;
+    
+  // uuid_show()
+
+
+
+Email.send({
+  SecureToken: "71107d27-3242-4914-8bbe-638bad534df3",
+  To: 'Makecart1@gmail.com',
+  From: "makecartcommunication@gmail.com",
+  Subject: "New order for shoe1",
+  Body: make_order
+}).then(
+  message => alert(message)
+);
+
+
+
+
+uuid_show();
+alert("your order was placed")
+    
+  }
+  
+  
+  var msg = "Please cancle the order of the order id : " + uuid;
+  function cancle_order(){
+    
+    //  71107d27-3242-4914-8bbe-638bad534df3
+    
+    Email.send({
+      SecureToken: "71107d27-3242-4914-8bbe-638bad534df3",
+      To: 'Makecart1@gmail.com',
+      From: "makecartcommunication@gmail.com",
+      Subject: "Order canceleation request",
+      Body: msg
+    }).then(
+      message => alert(message)
+    );
+    
+    document.getElementById("gh").innerHTML = '<h1>Your order was cancled sucessfully </h1>';
+    
+  }
+</script>
+<script src="https://smtpjs.com/v3/smtp.js">
+</script>
+</html>
